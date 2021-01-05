@@ -115,3 +115,18 @@ insert into subcategory(subcategory_id, topcategory_id,name) values(seq_subcateg
 insert into subcategory(subcategory_id, topcategory_id,name) values(seq_subcategory.nextval,4,'구두');
 insert into subcategory(subcategory_id, topcategory_id,name) values(seq_subcategory.nextval,4,'샌들');
 insert into subcategory(subcategory_id, topcategory_id,name) values(seq_subcategory.nextval,4,'슬리퍼');
+
+create table member(
+   member_id number primary key
+    , user_id varchar(40)
+    , name varchar(40)
+    , password varchar(40)
+    , email_id varchar(40)
+    , email_server varchar(40)
+    , zipcode varchar(20)
+    , addr varchar(150)
+    , regdate date default sysdate
+);
+create sequence seq_member
+increment by 1
+start with 1;

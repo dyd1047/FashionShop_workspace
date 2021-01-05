@@ -61,8 +61,7 @@ input[type=button]:hover {
 </style>
 <script type="text/javascript">
 var uploadFiles=[]; //미리보기 이미지 목록 
-var psizeArray=[]; //유저가 선택한 사이즈를 담는 배열
-
+var psize=[] ; //유저가 선택한 사이즈를 담는 배열 
 $(function(){
 	CKEDITOR.replace("detail");	
 	
@@ -121,11 +120,28 @@ $(function(){
 		$(e.target).parent().remove();
 	});
 	
-	//체크박스 이벤트 구현
+	
+	//체크박스 이벤트 구현 
 	$("input[type='checkbox']").on("click", function(e){
-		var ch = e.target; //이벤트 일으킨 주체 컴포넌트 즉 체크박스
-		alert($(ch).val());
+		var ch = e.target;//이벤트 일으킨 주체컴포넌트 즉 체크박스
+		//체크박스의 길이 얻기 
+		var ch=$("input[name='size']");
+		var len =$(ch).length; //반복문이용하려고..
+	
+		
+		psize=[];//배열 초기화
+		console.log("채우기 전 psize의 길이는 ",psize.length);
+		
+		for(var i=0;i<len;i++){
+			//만일 체크가 되어있다면, 기존 배열을 모두 지우고, 체크된 체크박스 값만 배열에 넣자!!
+			if($($(ch)[i]).is(":checked")){
+				psize.push($($(ch)[i]).val());
+			}
+			//console.log(i,"번째 체크박스 상태는 ", $($(ch)[i]).is(":checked"));
+		}		
+		console.log("서버에 전송할 사이즈 배열의 구성은 ", psize);
 	});
+	
 });
 //업로드 이미지 미리보기
 function preview(file, index){
@@ -171,16 +187,14 @@ function getSubList(obj){
 		}
 	});
 }
-
 //사이즈 선택시 배열 재구성하기
-function (){
+function setPsizeArray(){
+	
 	
 }
-
 //상품 등록
 function regist(){
 	/*비동기 전송시, 기존의 form을 이용할수 있을까?  yes!!*/
-	//$("textarea").val(CKEDITOR.instances.detail.getData());
 	
 	var formData = new FormData($("form")[0]);//<form>태그와는 틀리다..전송할때 파라미터들을 담을수있지만 이 자체가
 													//폼태그는 아니다!!
@@ -193,9 +207,17 @@ function regist(){
 		console.log(file.name);
 	});	
 	
-	//폼데이터에 에디터의 값 추가하기!!
+	//폼데이터에 에디터의 값 추가하기!! 
 	formData.append("detail", CKEDITOR.instances["detail"].getData());
+	for(var i=0;i<psize.length;i++){
+		formData.append("psize["+i+"].fit", psize[i]);
+	}
 	
+	/*
+	input type="checkbox" name="test" value="banana"
+	input type="checkbox" name="test" value="apple"
+	input type="checkbox" name="test" value="orange"
+	*/
 	/*비동기 업로드*/
 	$.ajax({
 		url:"/admin/product/regist",
@@ -203,8 +225,14 @@ function regist(){
 		contentType:false, /* false일 경우 multipart/form-data*/
 		processData:false, /* false일 경우 query-string으로 전송하지 않음*/
 		type:"post",
-		success:function(result){
-			alert(result);
+		success:function(responseData){
+			var json = JSON.parse(responseData); //string --> json으로 파싱..
+			if(json.result == 1){
+				alert(json.msg);
+				location.href="/admin/product/list";
+			}else{
+				alert(json.msg);
+			}
 		}
 	});
 	
@@ -233,7 +261,7 @@ function regist(){
   		<%} %>
   	</select>
   	
-  	<select name="subcategory_id">
+  	<select name="subCategory.subcategory_id">
   		<option>하위카테고리 선택</option>
   	</select>
     <input type="text" name="product_name" placeholder="상품명">
@@ -245,12 +273,12 @@ function regist(){
 	<div id="dragArea"></div>
 	<!-- 지원 사이즈 선택  -->
 	<p>
-		XS<input type="checkbox" 	name="psize[0].fit" value="XS">
-		S<input type="checkbox" 		name="psize[1].fit" value="S">
-		M<input type="checkbox" 		name="psize[2].fit" value="M">
-		L<input type="checkbox" 		name="psize[3].fit" value="L">
-		XL<input type="checkbox" 	name="psize[4].fit" value="XL">
-		XXL<input type="checkbox" 	name="psize[5].fit" value="XXL">
+		XS<input type="checkbox" 	name="size" value="XS">
+		S<input type="checkbox" 		name="size" value="S">
+		M<input type="checkbox" 		name="size" value="M">
+		L<input type="checkbox" 		name="size" value="L">
+		XL<input type="checkbox" 	name="size" value="XL">
+		XXL<input type="checkbox" 	name="size" value="XXL">
 	</p>
 	
 	<p>

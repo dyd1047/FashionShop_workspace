@@ -6,5 +6,5 @@ import lombok.Data;
 public class Color {
 	private int color_id;
 	private int product_id;
-	private String pikcer;
+	private String picker;
 }
