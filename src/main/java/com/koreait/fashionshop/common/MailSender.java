@@ -16,8 +16,8 @@ import com.koreait.fashionshop.exception.MailSendException;
 @Component
 public class MailSender {
 	String host = "smtp.gmail.com";
-	String user = "zino1187@gmail.com";
-	String password = "cluscskqavlddxzu"; //크롬브라우저 보안에서 인증받은 비번넣기
+	String user = "dyd414646@gmail.com";
+	String password = ""; //크롬브라우저 보안에서 인증받은 비번넣기
 	Properties props = new Properties();
 	
 	public void send(String to, String title, String content) throws MailSendException{
