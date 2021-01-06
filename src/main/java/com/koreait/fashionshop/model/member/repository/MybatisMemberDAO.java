@@ -13,7 +13,7 @@ import com.koreait.fashionshop.model.domain.Member;
 public class MybatisMemberDAO implements MemberDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-
+	
 	@Override
 	public List selectAll() {
 		return null;
@@ -27,7 +27,7 @@ public class MybatisMemberDAO implements MemberDAO{
 	@Override
 	public void insert(Member member) throws MemberRegistException{
 		int result = sqlSessionTemplate.insert("Member.insert", member);
-		if(result == 0) {
+		if(result==0) {
 			throw new MemberRegistException("회원가입에 실패하였습니다.");
 		}
 	}
@@ -41,5 +41,5 @@ public class MybatisMemberDAO implements MemberDAO{
 	public void delete(Member member) {
 		
 	}
-
+	
 }

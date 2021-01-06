@@ -13,7 +13,7 @@ import com.koreait.fashionshop.model.domain.Color;
 public class MybatisColorDAO implements ColorDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-
+	
 	@Override
 	public List selectAll() {
 		return null;
@@ -32,19 +32,19 @@ public class MybatisColorDAO implements ColorDAO{
 	@Override
 	public void insert(Color color) throws ProductRegistException{
 		int result = sqlSessionTemplate.insert("Color.insert", color);
-		if(result == 0) {
-			throw new ProductRegistException("색상 등록에 실패하였습니다.");
+		if(result==0) {
+			throw new ProductRegistException("색상 등록에 실패하였습니다");
 		}
 	}
 
 	@Override
-	public void update(Color color) throws ProductRegistException{
+	public void update(Color color)  throws ProductRegistException{
 		
 	}
 
 	@Override
-	public void delete(int color_id) throws ProductRegistException{
+	public void delete(int color_id)  throws ProductRegistException{
 		
 	}
-
+	
 }

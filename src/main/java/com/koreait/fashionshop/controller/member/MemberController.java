@@ -17,20 +17,20 @@ import com.koreait.fashionshop.model.member.service.MemberService;
 
 @Controller
 public class MemberController {
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	private static final Logger logger=LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
 	private MemberService memberService;
 	
-	//회원가입 폼 요청
+	//회원가입폼 요청 
 	@RequestMapping(value="/shop/member/registForm", method=RequestMethod.GET)
 	public String getRegistForm() {
 		
 		return "shop/member/signup";
 	}
 	
-	//회원가입 요청 처리
-	@RequestMapping(value="/shop/member/regist", method=RequestMethod.POST, produces="text/html;charset=utf-8;")
+	//회원가입 요청 처리 
+	@RequestMapping(value="/shop/member/regist", method=RequestMethod.POST, produces="text/html;charset=utf-8")
 	@ResponseBody
 	public String regist(Member member) {
 		logger.debug("아이디 "+member.getUser_id());
@@ -45,33 +45,32 @@ public class MemberController {
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("{");
-		sb.append("\"result\":1,");
-		sb.append("\"msg\":\"회원가입 성공\"");
+		sb.append(" \"result\":1, ");
+		sb.append(" \"msg\":\"회원가입 성공\"");
 		sb.append("}");
 		
 		return sb.toString();
-	}
-	
+	} 
+
 	//예외 핸들러 2가지 처리
 	@ExceptionHandler(MemberRegistException.class)
 	@ResponseBody
-	public String handelException(MemberRegistException e) {
+	public String handleException(MemberRegistException e) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("{");
-		sb.append("\"result\":1,");
-		sb.append("\"msg\":\""+e.getMessage()+"\"");
+		sb.append(" \"result\":0, ");
+		sb.append(" \"msg\":\""+e.getMessage()+"\"");
 		sb.append("}");
 		
 		return sb.toString();
 	}
 	
 	@ExceptionHandler(MailSendException.class)
-	public ModelAndView handelException(MailSendException e) {
+	public ModelAndView handleException(MailSendException e) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("msg", e.getMessage()); //사용자가 보게될 에러 메세지
+		mav.addObject("msg", e.getMessage()); //사용자가 보게될 에러 메시지
 		mav.setViewName("shop/error/result");
-		//시스템 관리자들에게 알려야함..
-		
 		return mav;
 	}
+	
 }

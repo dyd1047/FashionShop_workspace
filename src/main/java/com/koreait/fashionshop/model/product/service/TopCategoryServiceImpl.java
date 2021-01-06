@@ -12,7 +12,7 @@ import com.koreait.fashionshop.model.product.repository.TopCategoryDAO;
 public class TopCategoryServiceImpl implements TopCategoryService{
 	@Autowired
 	private TopCategoryDAO topCategoryDAO;
-
+	
 	@Override
 	public List selectAll() {
 		return topCategoryDAO.selectAll();

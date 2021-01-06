@@ -8,11 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.koreait.fashionshop.model.domain.TopCategory;
 
-@Repository //component-scan의 대상이 될 수 있으려면...
+@Repository  //componet-scan의 대상이 될 수 있으려면..
 public class MybatisTopCategoryDAO implements TopCategoryDAO{
-	
 	@Autowired
-	private SqlSessionTemplate sessionTemplate;
+	private SqlSessionTemplate sessionTemplate; 
 	
 	@Override
 	public List selectAll() {

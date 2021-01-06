@@ -1,7 +1,6 @@
-<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page contentType="text/html; charset=utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -11,13 +10,11 @@
 
     <!-- Title  -->
     <title>Karl - Fashion Ecommerce Template | Home</title>
-
-    <%@ include file="./shop/inc/header.jsp" %>
-
+	<%@ include file="./shop/inc/header.jsp" %>
 </head>
 
 <body>
-    	<%@ include file="./shop/inc/top.jsp" %>
+    	<%@include file="./shop/inc/top.jsp" %>
         <!-- ****** Top Discount Area End ****** -->
 
         <!-- ****** Welcome Slides Area Start ****** -->
@@ -392,7 +389,6 @@
         <!-- ****** Footer Area End ****** -->
     </div>
     <!-- /.wrapper end -->
-
 </body>
 
 </html>

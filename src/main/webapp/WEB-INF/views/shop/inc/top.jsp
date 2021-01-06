@@ -1,4 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@page import="com.koreait.fashionshop.model.domain.SubCategory"%>
+<%@page import="com.koreait.fashionshop.model.domain.TopCategory"%>
+<%@page import="java.util.List"%>
+<%@ page contentType="text/html; charset=utf-8"%>
+<%
+	List<TopCategory> topList = (List)request.getAttribute("topList");
+%>
 <div class="catagories-side-menu">
         <!-- Close Icon -->
         <div id="sideMenuClose">
@@ -10,45 +16,18 @@
                 <h6>Categories</h6>
                 <ul id="menu-content" class="menu-content collapse out">
                     <!-- Single Item -->
-                    <li data-toggle="collapse" data-target="#women" class="collapsed active">
-                        <a href="#">Top Wear <span class="arrow"></span></a>
-                        <ul class="sub-menu collapse" id="women">
-                            <li><a href="#">Cardigan</a></li>
-                            <li><a href="#">Jumper</a></li>
-                            <li><a href="#">Neat</a></li>
-                            <li><a href="#">T-shirt</a></li>
+                    <%for(int i=0;i<topList.size();i++){ %>
+                    <%TopCategory topCategory=topList.get(i); %>
+                    <li data-toggle="collapse" data-target="#<%=topCategory.getTopcategory_id() %>" class="collapsed active">
+                        <a href="#"><%=topCategory.getName() %><span class="arrow"></span></a>
+                        <ul class="sub-menu collapse" id="<%=topCategory.getTopcategory_id()%>">
+                        	<%for(int a=0;a<topCategory.getSubCategory().size();a++){ %>
+                        	<%SubCategory subCategory=topCategory.getSubCategory().get(a);%>
+                            <li><a href="#"><%=subCategory.getName() %></a></li>
+							<%} %>
                         </ul>
-                    </li>
-                    <!-- Single Item -->
-                    <li data-toggle="collapse" data-target="#man" class="collapsed">
-                        <a href="#">Down Wear <span class="arrow"></span></a>
-                        <ul class="sub-menu collapse" id="man">
-                            <li><a href="#">Jeans</a></li>
-                            <li><a href="#">Shorts</a></li>
-                            <li><a href="#">Cotton Pants</a></li>
-                            <li><a href="#">Suit Pants</a></li>
-                        </ul>
-                    </li>
-                    <!-- Single Item -->
-                    <li data-toggle="collapse" data-target="#kids" class="collapsed">
-                        <a href="#">Accessory <span class="arrow"></span></a>
-                        <ul class="sub-menu collapse" id="kids">
-                            <li><a href="#">Earring</a></li>
-                            <li><a href="#">Necklace</a></li>
-                            <li><a href="#">Bracelet</a></li>
-                            <li><a href="#">Ring</a></li>
-                        </ul>
-                    </li>
-                    <!-- Single Item -->
-                    <li data-toggle="collapse" data-target="#bags" class="collapsed">
-                        <a href="#">Shoes &amp; Purses <span class="arrow"></span></a>
-                        <ul class="sub-menu collapse" id="bags">
-                            <li><a href="#">Running shoes</a></li>
-                            <li><a href="#">Shoes</a></li>
-                            <li><a href="#">Sandal</a></li>
-                            <li><a href="#">Slipper</a></li>
-                        </ul>
-                    </li>
+                    </li>       
+                    <%} %>          
                 </ul>
             </div>
         </div>
@@ -122,7 +101,8 @@
                                 <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                                 <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                             </div>
-                            <!-- Menu Area : 메인 네비게이션 영역 -->
+                            
+                            <!-- Menu Area : 메인네비게이션 영역 -->
                             <div class="main-menu-area">
                                 <nav class="navbar navbar-expand-lg align-items-start">
 
@@ -134,11 +114,11 @@
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" id="karlDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
                                                 <div class="dropdown-menu" aria-labelledby="karlDropdown">
-                                                    <a class="dropdown-item" href="index.html">Home</a>
-                                                    <a class="dropdown-item" href="shop.html">Shop</a>
-                                                    <a class="dropdown-item" href="product-details.html">Product Details</a>
-                                                    <a class="dropdown-item" href="cart.html">Cart</a>
-                                                    <a class="dropdown-item" href="checkout.html">Checkout</a>
+                                                    <a class="dropdown-item" href="/">Home</a>
+                                                    <a class="dropdown-item" href="/shop/product/list?subcategory_id=1">Shop</a>
+                                                    <a class="dropdown-item" href="/shop/product/detail">Product Details</a>
+                                                    <a class="dropdown-item" href="/shop/cart/list">Cart</a>
+                                                    <a class="dropdown-item" href="/shop/checkout/form">Checkout</a>
                                                 </div>
                                             </li>
                                             <li class="nav-item"><a class="nav-link" href="#">Dresses</a></li>

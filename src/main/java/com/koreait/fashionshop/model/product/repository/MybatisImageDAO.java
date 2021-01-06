@@ -13,7 +13,7 @@ import com.koreait.fashionshop.model.domain.Image;
 public class MybatisImageDAO implements ImageDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-
+	
 	@Override
 	public List selectAll() {
 		return null;
@@ -30,21 +30,22 @@ public class MybatisImageDAO implements ImageDAO{
 	}
 
 	@Override
-	public void insert(Image image) throws ProductRegistException{
+	public void insert(Image image)  throws ProductRegistException{
 		int result = sqlSessionTemplate.insert("Image.insert", image);
-		if(result == 0) {
-			throw new ProductRegistException("이미지 등록에 실패하였습니다.");
+		if(result==0) {
+			throw new ProductRegistException("추가 이미지 등록에 실패하였습니다");
 		}
-	}
-
-	@Override
-	public void update(Image image) throws ProductRegistException{
 		
 	}
 
 	@Override
-	public void delete(int image_id) throws ProductRegistException{
+	public void update(Image image)  throws ProductRegistException{
 		
 	}
 
+	@Override
+	public void delete(int image_id)  throws ProductRegistException{
+		
+	}
+	
 }

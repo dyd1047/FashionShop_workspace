@@ -7,4 +7,5 @@ public class Image {
 	private int image_id;
 	private int product_id;
 	private String filename;
+	
 }

@@ -21,7 +21,7 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private MailSender mailSender;
 	
-	//암호화 객체
+	//암호화 객체 
 	@Autowired
 	private SecureManager secureManager;
 	
@@ -37,11 +37,12 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public void regist(Member member) throws MemberRegistException, MailSendException{
-		//암호화 처리
+		//DB에 넣기 + 이메일보내기 + 문자발송..
+		
+		//암호화 처리 
 		String secureData = secureManager.getSecureData(member.getPassword());
 		member.setPassword(secureData); //변환시켜 다시 VO에 대입
 		
-		//DB에 넣기 + 이메일보내기 + 문자발송..
 		memberDAO.insert(member);
 		
 		String name=member.getName();

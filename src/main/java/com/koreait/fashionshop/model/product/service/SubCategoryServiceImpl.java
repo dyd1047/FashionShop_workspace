@@ -11,8 +11,8 @@ import com.koreait.fashionshop.model.product.repository.SubCategoryDAO;
 @Service
 public class SubCategoryServiceImpl implements SubCategoryService{
 	@Autowired
-	private SubCategoryDAO subCategoryDAO;
-
+	private SubCategoryDAO subCategoryDAO; 
+	
 	@Override
 	public List selectAll() {
 		return null;
@@ -29,17 +29,17 @@ public class SubCategoryServiceImpl implements SubCategoryService{
 	}
 
 	@Override
-	public void insert(SubCategory subcategory) {
+	public void insert(SubCategory topcategory) {
 		
 	}
 
 	@Override
-	public void update(SubCategory subcategory) {
+	public void update(SubCategory topcategory) {
 		
 	}
 
 	@Override
-	public void delete(int subcategory_id) {
+	public void delete(int topcategory_id) {
 		
 	}
 

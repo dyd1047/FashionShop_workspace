@@ -13,38 +13,39 @@ import com.koreait.fashionshop.model.domain.Product;
 public class MybatisProductDAO implements ProductDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-
+	
 	@Override
 	public List selectAll() {
 		return sqlSessionTemplate.selectList("Product.selectAll");
 	}
 
 	@Override
-	public List selectAllById(int subcategory_id) {
-		return null;
+	public List selectById(int subcategory_id) {
+		return sqlSessionTemplate.selectList("Product.selectBySubCategoryId", subcategory_id);
 	}
 
 	@Override
 	public Product select(int product_id) {
-		return null;
+		return sqlSessionTemplate.selectOne("Product.select", product_id);
 	}
 
 	@Override
 	public void insert(Product product) throws ProductRegistException{
 		int result = sqlSessionTemplate.insert("Product.insert", product);
-		if(result == 0) {
-			throw new ProductRegistException("상품 테이블 입력 실패");
+		if(result==0) {
+			throw new ProductRegistException("상품테이블에 입력실패");
 		}
 	}
 
 	@Override
 	public void update(Product product) throws ProductRegistException{
+
 		
 	}
 
 	@Override
-	public void delete(int product_id) throws ProductRegistException{
+	public void delete(int product_id)  throws ProductRegistException{
 		
 	}
-
+	
 }

@@ -12,7 +12,7 @@ import com.koreait.fashionshop.model.domain.SubCategory;
 public class MybatisSubCategoryDAO implements SubCategoryDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-
+	
 	@Override
 	public List selectAll() {
 		return null;
@@ -29,18 +29,18 @@ public class MybatisSubCategoryDAO implements SubCategoryDAO{
 	}
 
 	@Override
-	public void insert(SubCategory subcategory) {
+	public void insert(SubCategory topcategory) {
 		
 	}
 
 	@Override
-	public void update(SubCategory subcategory) {
+	public void update(SubCategory topcategory) {
 		
 	}
 
 	@Override
-	public void delete(int subcategory_id) {
+	public void delete(int topcategory_id) {
 		
 	}
-
+	
 }

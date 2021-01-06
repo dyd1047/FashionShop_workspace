@@ -13,7 +13,7 @@ import com.koreait.fashionshop.model.domain.Psize;
 public class MybatisPsizeDAO implements PsizeDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-
+	
 	@Override
 	public List selectAll() {
 		return null;
@@ -30,21 +30,22 @@ public class MybatisPsizeDAO implements PsizeDAO{
 	}
 
 	@Override
-	public void insert(Psize psize) throws ProductRegistException{
+	public void insert(Psize psize)  throws ProductRegistException{
 		int result = sqlSessionTemplate.insert("Psize.insert", psize);
-		if(result == 0) {
-			throw new ProductRegistException("사이즈 등록에 실패하였습니다.");
+		if(result==0) {
+			throw new ProductRegistException("사이즈 등록에 실패하였습니다");
 		}
-	}
-
-	@Override
-	public void update(Psize psize) throws ProductRegistException{
 		
 	}
 
 	@Override
-	public void delete(int psize_id) throws ProductRegistException{
+	public void update(Psize psize)  throws ProductRegistException{
 		
 	}
 
+	@Override
+	public void delete(int psize_id)  throws ProductRegistException{
+		
+	}
+	
 }

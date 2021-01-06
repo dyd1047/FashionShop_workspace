@@ -43,12 +43,12 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public List selectById(int subcategory_id) {
-		return null;
+		return productDAO.selectById(subcategory_id);
 	}
 
 	@Override
 	public Product select(int product_id) {
-		return null;
+		return productDAO.select(product_id);
 	}
 
 	@Override
@@ -85,7 +85,7 @@ public class ProductServiceImpl implements ProductService{
 		
 		//사이즈
 		for(Psize psize : product.getPsize()) {
-			logger.debug("당신이 선택한 사이즈는 "+psize.getFit());
+			//logger.debug("당신이 선택한 사이즈는 "+psize.getFit());
 			psize.setProduct_id(product.getProduct_id());//fk 대입
 			psizeDAO.insert(psize);
 		}

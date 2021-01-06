@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page contentType="text/html;charset=utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,26 +12,28 @@
     <!-- Title  -->
     <title>Karl - Fashion Ecommerce Template | Home</title>
 
-    <%@ include file="../inc/header.jsp" %>
-	<style>
+   <%@ include file="../inc/header.jsp" %>
+ <style>
 		.container {
 		  border-radius: 5px;
+		  background-color: #f2f2f2;
 		  padding: 20px;
 		}
-	</style>
+</style>
 </head>
 
 <body>
-    	<%@ include file="../inc/top.jsp" %>
+		<%@include file="../inc/top.jsp" %>
         <!-- ****** Top Discount Area End ****** -->
 		
+		<!-- 에러 나올 곳 -->
 		<div class="container">
-			<h3>이용에 불편을 드려 죄송합니다.</h3>
+		<h1>이용에 불편을 드려 죄송합니다.</h1>
 			<%=request.getAttribute("msg") %>
 		</div>
-		
+	
         <!-- ****** Footer Area Start ****** -->
-        <%@ include file="../inc/footer.jsp" %>
+       	<%@ include file="../inc/footer.jsp" %> 
         <!-- ****** Footer Area End ****** -->
     </div>
     <!-- /.wrapper end -->
