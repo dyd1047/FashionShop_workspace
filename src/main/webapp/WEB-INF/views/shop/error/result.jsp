@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=utf-8"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,14 +16,13 @@
  <style>
 		.container {
 		  border-radius: 5px;
-		  background-color: #f2f2f2;
 		  padding: 20px;
 		}
 </style>
 </head>
 
 <body>
-		<%@include file="../inc/top.jsp" %>
+		<%@ include file="../inc/top.jsp" %>
         <!-- ****** Top Discount Area End ****** -->
 		
 		<!-- 에러 나올 곳 -->
