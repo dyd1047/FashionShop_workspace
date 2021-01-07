@@ -23,7 +23,7 @@
                         <ul class="sub-menu collapse" id="<%=topCategory.getTopcategory_id()%>">
                         	<%for(int a=0;a<topCategory.getSubCategory().size();a++){ %>
                         	<%SubCategory subCategory=topCategory.getSubCategory().get(a);%>
-                            <li><a href="#"><%=subCategory.getName() %></a></li>
+                            <li><a href="/shop/product/list?subcategory_id=<%=subCategory.getSubcategory_id()%>"><%=subCategory.getName() %></a></li>
 							<%} %>
                         </ul>
                     </li>       
@@ -111,15 +111,7 @@
                                     <div class="collapse navbar-collapse align-items-start collapse" id="karl-navbar">
                                         <ul class="navbar-nav animated" id="nav">
                                             <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#" id="karlDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
-                                                <div class="dropdown-menu" aria-labelledby="karlDropdown">
-                                                	<%for(TopCategory topCategory : topList){ %>
-                                                    <a class="dropdown-item" href="/shop/product/list?subcategory_id=1"><%=topCategory.getName() %></a>
-                                                    <%} %>
-                                                </div>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link" href="/shop/product/list?subcategory_id=<%=1%>">Shop</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="/shop/product/list?subcategory_id=1">Shop</a></li>
                                             <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                                             <li class="nav-item"><a class="nav-link" href="/shop/member/registForm">SignUp</a></li>
                                             <li class="nav-item">

@@ -172,7 +172,7 @@
 
                             <ul class="cart-total-chart">
                                 <li><span>Subtotal</span> <span><%=Formatter.getCurrency(sum) %></span></li>
-                                <li><span>Shipping</span> <span id="shipping"></span></li>
+                                <li><span>Shipping</span><span id="shipping"></span></li>
                                 <li><span><strong>Total</strong></span> <span><strong id="totalPrice"><%=Formatter.getCurrency(sum) %></strong></span></li>
                             </ul>
                             <a href="checkout.html" class="btn karl-checkout-btn">Proceed to checkout</a>

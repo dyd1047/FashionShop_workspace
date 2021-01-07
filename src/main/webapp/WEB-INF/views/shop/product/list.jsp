@@ -146,7 +146,7 @@
 						                        <a href="#"><%=topCategory.getName() %><span class="arrow"></span></a>
 						                        <ul class="sub-menu collapse" id="category<%=topCategory.getTopcategory_id()%>">
                                                 	<%for(SubCategory subCategory : topCategory.getSubCategory()){ %>
-							                            <li><a href="#"><%=subCategory.getName() %></a></li>
+							                            <li><a href="/shop/product/list?subcategory_id=<%=subCategory.getSubcategory_id() %>"><%=subCategory.getName() %></a></li>
                                                     <%} %>
 						                        </ul>
 						                    </li>
