@@ -1,4 +1,4 @@
-<%@page import="com.koreait.fashionshop.common.Formatter"%>
+<%@page import="com.koreait.petshop.model.common.Formatter"%>
 <%@page import="com.koreait.fashionshop.model.domain.Cart"%>
 <%@ page contentType="text/html; charset=utf-8" %>
 <%
@@ -64,6 +64,9 @@
 			
 			console.log(<%=sum %>);
 			console.log(customRadio);
+		}
+		function checkoutForm(){
+			location.href="/shop/payment/form";
 		}
 		
 	</script>
@@ -175,7 +178,7 @@
                                 <li><span>Shipping</span><span id="shipping"></span></li>
                                 <li><span><strong>Total</strong></span> <span><strong id="totalPrice"><%=Formatter.getCurrency(sum) %></strong></span></li>
                             </ul>
-                            <a href="checkout.html" class="btn karl-checkout-btn">Proceed to checkout</a>
+                            <a href="javascript:checkoutForm()" class="btn karl-checkout-btn">Proceed to checkout</a>
                         </div>
                     </div>
                 </div>
