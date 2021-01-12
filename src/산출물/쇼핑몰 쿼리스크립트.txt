@@ -126,6 +126,7 @@ create table member(
     , email_server varchar(40)
     , zipcode varchar(20)
     , addr varchar(150)
+    , addr_detail varchar(150)
     , regdate date default sysdate
 );
 create sequence seq_member

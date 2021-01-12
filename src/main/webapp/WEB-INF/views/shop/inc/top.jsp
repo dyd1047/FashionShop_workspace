@@ -112,7 +112,7 @@
                                         <ul class="navbar-nav animated" id="nav">
                                             <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
                                             <li class="nav-item"><a class="nav-link" href="/shop/product/list?subcategory_id=1">Shop</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="/shop/cs/qna/list">Contact</a></li>
                                             <li class="nav-item"><a class="nav-link" href="/shop/member/registForm">SignUp</a></li>
                                             <li class="nav-item">
                                             	<%if(session.getAttribute("member")==null){ //세션에 담겨진 데이터가 없다면%>
