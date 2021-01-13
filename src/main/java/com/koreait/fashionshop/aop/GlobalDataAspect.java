@@ -31,6 +31,7 @@ public class GlobalDataAspect {
 		if (uri.equals("/shop/member/login")|| //클라이언트의 요청이 topList를 필요로하지 않는 경우 shop/member/login, shop/member/regist
 			uri.equals("/shop/member/regist")||
 			uri.equals("/admin/product/regist")||
+			uri.equals("/admin/product/excel/registform")||
 			uri.equals("/admin")
 		) { 
 			

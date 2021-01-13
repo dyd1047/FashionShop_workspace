@@ -1,5 +1,6 @@
 package com.koreait.fashionshop.controller.product;
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -10,14 +11,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.koreait.fashionshop.exception.ProductRegistException;
+import com.koreait.fashionshop.exception.UploadFailException;
 import com.koreait.fashionshop.model.common.FileManager;
+import com.koreait.fashionshop.model.common.MessageData;
 import com.koreait.fashionshop.model.domain.Product;
 import com.koreait.fashionshop.model.domain.Psize;
 import com.koreait.fashionshop.model.domain.SubCategory;
@@ -111,6 +116,27 @@ public class ProductController implements ServletContextAware{
 	}
 	 */
 
+	//엑셀 대량 등록 폼
+	@GetMapping("/admin/product/excel/registform")
+	public String getExcelForm(HttpServletRequest request) {
+		return "admin/product/excel_form";
+	}
+	
+	//엑셀에 의한 상품등록 요청 처리
+	@RequestMapping(value="/admin/product/excel/regist", method=RequestMethod.POST, produces="text/html;charset=utf-8")
+	@ResponseBody //비동기 이므로
+	public String registByExcel(HttpServletRequest request, MultipartFile dump) {
+		String path = fileManager.getSaveBasicDir()+File.separator+dump.getOriginalFilename(); //저장할 파일명
+		fileManager.saveFile(path, dump);
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("{");
+		sb.append("\"result\":1,");
+		sb.append("\"msg\":\"상품등록 성공\"");
+		sb.append("}");
+		
+		return sb.toString();
+	}
 	
 	//상품목록
 	@RequestMapping(value="/admin/product/list", method=RequestMethod.GET )
@@ -169,6 +195,17 @@ public class ProductController implements ServletContextAware{
 	@ExceptionHandler(ProductRegistException.class)
 	@ResponseBody
 	public String handleException(ProductRegistException e) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("{");
+		sb.append("\"result\":0");
+		sb.append("\"msg\":\""+e.getMessage()+"\"");
+		sb.append("}");
+		return sb.toString();
+	}
+	
+	@ExceptionHandler(UploadFailException.class)
+	@ResponseBody
+	public String handleException(UploadFailException e) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{");
 		sb.append("\"result\":0");
