@@ -16,16 +16,19 @@ public class MybatisPsizeDAO implements PsizeDAO{
 	
 	@Override
 	public List selectAll() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List selectById(int product_id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Psize select(int psize_id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -40,11 +43,13 @@ public class MybatisPsizeDAO implements PsizeDAO{
 
 	@Override
 	public void update(Psize psize)  throws ProductRegistException{
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void delete(int psize_id)  throws ProductRegistException{
+		// TODO Auto-generated method stub
 		
 	}
 	

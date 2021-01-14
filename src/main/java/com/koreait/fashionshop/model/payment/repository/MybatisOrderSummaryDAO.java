@@ -11,13 +11,17 @@ import com.koreait.fashionshop.model.domain.OrderSummary;
 public class MybatisOrderSummaryDAO implements OrderSummaryDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-
-	@Override
+	
 	public void insert(OrderSummary orderSummary) throws OrderSummaryRegistException{
-		int result = sqlSessionTemplate.insert("OrderSummary.insert", orderSummary);
-		if (result == 0) {
-			throw new OrderSummaryRegistException("주문 요약 등록 실패");
+		int result=sqlSessionTemplate.insert("OrderSummary.insert", orderSummary);
+		if(result==0) {
+			throw new OrderSummaryRegistException("주문요약 등록실패");
 		}
 	}
-
+	
 }
+
+
+
+
+

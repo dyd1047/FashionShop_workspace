@@ -1,9 +1,9 @@
 <%@page import="com.koreait.fashionshop.model.common.Formatter"%>
 <%@page import="com.koreait.fashionshop.model.domain.Product"%>
-<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%
 	List<Product> productList  = (List)request.getAttribute("productList");
-	out.print("가져온 상품의 수는 "+productList.size());
+	//out.print("가져온 상품의 수는 "+productList.size());
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,40 +18,41 @@
     <title>Karl - Fashion Ecommerce Template | Home</title>
 	<%@ include file="../inc/header.jsp" %>
 	<script>
-		$(function(){
-			//product-quicview를 클릭했을 때..
-			$(".product-quicview").on("click", function(e){
-				var obj = e.target;
-				var product_id = $(obj).data("product_id");
-				var product_name = $(obj).data("product_name");
-				var price = $(obj).data("price");
-				var brand = $(obj).data("brand");
-				var detail = $(obj).data("detail");
-				var filename = $(obj).data("filename");
-				
-				console.log(product_id);
-				console.log(product_name, price, brand, detail, filename);
-				//지금 클릭한 상품의 정보를 구해와서, 퀵뷰창에 보여준다..
-				
-				//이미지
-				$(".quickview_pro_img img").attr({
-					src:"/resources/data/basic/"+product_id+"."+filename
-				}); //이미지 교체
-				
-				//상품명
-				$(".quickview_pro_des .title").html(product_name);
-				
-				//가격
-				$(".quickview_pro_des .price").html(price);
-				
-				//상세내용
-				$(".quickview_pro_des p").html(detail);
-				
-				$(".quickview_pro_des a").on("click", function(){
-					location.href="/shop/product/detail?product_id="+product_id;
-				});
+	$(function(){
+		//product-quicview를 클릭했을때...
+		$(".product-quicview").on("click", function(e){
+			var obj = e.target;
+			var product_id=$(obj).data("product_id");
+			var product_name=$(obj).data("product_name");
+			var price=$(obj).data("price");
+			var brand=$(obj).data("brand");
+			var detail=$(obj).data("detail");
+			var filename=$(obj).data("filename");
+			
+			console.log(product_id);
+			console.log(product_name);
+			console.log(price);
+			console.log(brand);
+			console.log(detail);
+			console.log(filename);
+
+			//퀵뷰창의 상품 정보에 출력
+			
+			//이미지
+			$(".quickview_pro_img img").attr({
+				src:"/resources/data/basic/"+product_id+"."+filename
+			});
+			
+			$(".quickview_pro_des .title").html(product_name);//상품명
+			$(".quickview_pro_des .price").html(price);//가격
+			$(".quickview_pro_des p").html(detail);//상세내용
+			
+			$(".quickview_pro_des a").on("click", function(e){
+				location.href="/shop/product/detail?product_id="+product_id;
 			});
 		});
+		
+	});
 	</script>		
 </head>
 
@@ -140,14 +141,15 @@
                                     <h6 class="mb-0">Catagories</h6>
                                     <div class="menu-list">
                                         <ul id="menu-content2" class="menu-content collapse out">
-                                        	<%for(TopCategory topCategory : topList){ %>
-                                            <!-- Single Item -->
+                                            
+                                            <%for(TopCategory topCategory : topList){ %>
+						                    <!-- Single Item -->
 						                    <li data-toggle="collapse" data-target="#category<%=topCategory.getTopcategory_id()%>" class="collapsed">
-						                        <a href="#"><%=topCategory.getName() %><span class="arrow"></span></a>
+						                        <a href="#"><%=topCategory.getName() %> <span class="arrow"></span></a>
 						                        <ul class="sub-menu collapse" id="category<%=topCategory.getTopcategory_id()%>">
-                                                	<%for(SubCategory subCategory : topCategory.getSubCategory()){ %>
-							                            <li><a href="/shop/product/list?subcategory_id=<%=subCategory.getSubcategory_id() %>"><%=subCategory.getName() %></a></li>
-                                                    <%} %>
+						                            <%for(SubCategory subCategory : topCategory.getSubCategory()){ %>
+						                            <li><a href="#"><%=subCategory.getName() %></a></li>
+						                            <%} %>
 						                        </ul>
 						                    </li>
                                             <%} %>
@@ -246,16 +248,18 @@
                                 <div class="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig" data-wow-delay="0.2s">
                                     <!-- Product Image -->
                                     <div class="product-img">
-                                        <img src="/resources/data/basic/<%=product.getProduct_id()%>.<%=product.getFilename()%>" alt="">
+                                        <img src="/resources/pro/basic/<%=product.getProduct_id()%>.<%=product.getFilename()%>" alt="">
                                         <div class="product-quicview">
-                                            <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"
-                                            	data-product_id="<%=product.getProduct_id()%>"
-                                            	data-product_name="<%=product.getProduct_name() %>" 
-                                            	data-price="<%=Formatter.getCurrency(product.getPrice()) %>"
-                                            	data-brand="<%=product.getBrand() %>"
-                                            	data-detail="<%=product.getDetail() %>" 
-                                            	data-filename="<%=product.getFilename() %>" 
-                                            	></i></a>
+                                            <a href="" data-toggle="modal" data-target="#quickview">
+                                            	<i class="ti-plus"
+                                            		data-product_id="<%=product.getProduct_id()%>"
+                                            		data-product_name="<%=product.getProduct_name() %>" 
+                                            		data-price="<%=Formatter.getCurrency(product.getPrice())%>"
+                                            		data-brand="<%=product.getBrand() %>"  
+                                            		data-detail="<%=product.getDetail() %>"
+                                            		data-filename="<%=product.getFilename() %>"                                            		
+                                            		></i>
+                                            </a>
                                         </div>
                                     </div>
                                     <!-- Product Description -->

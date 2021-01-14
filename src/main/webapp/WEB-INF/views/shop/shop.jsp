@@ -1,4 +1,3 @@
-<%@ page contentType="text/html; charset=utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -410,7 +409,7 @@
                                             <img src="img/product-img/product-10.jpg" alt="">
                                         </div>
                                         <div class="single-recommended-desc">
-                                            <h6>Menâs T-shirt</h6>
+                                            <h6>Men’s T-shirt</h6>
                                             <p>$ 39.99</p>
                                         </div>
                                     </div>
@@ -430,7 +429,7 @@
                                             <img src="img/product-img/product-12.jpg" alt="">
                                         </div>
                                         <div class="single-recommended-desc">
-                                            <h6>Womenâs T-shirt</h6>
+                                            <h6>Women’s T-shirt</h6>
                                             <p>$ 39.99</p>
                                         </div>
                                     </div>

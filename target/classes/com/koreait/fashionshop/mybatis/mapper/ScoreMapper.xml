@@ -3,5 +3,5 @@
 <mapper namespace="Score">
 	<select id="selectByProductId" parameterType="int" resultType="Score">
 		select avg(star) as star from score where product_id=#{product_id}
-	</select>	
+	</select>
 </mapper>

@@ -17,17 +17,16 @@ public class MybatisMemberDAO implements MemberDAO{
 	
 	@Override
 	public List selectAll() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	//로그인 검증
-	@Override
 	public Member select(Member member) throws MemberNotFoundException{
-		Member obj = sqlSessionTemplate.selectOne("Member.select", member);
-		if(obj == null) { //올바르지 않은 정보로 회원을 조회하려고 하는 것임..
-			throw new MemberNotFoundException("로그인 정보가 올바르지 않습니다.");
+		Member obj=sqlSessionTemplate.selectOne("Member.select", member);
+		if(obj==null) { //올바르지 않은 정보로 회원을 조회하려고 하는 것임..
+			throw new MemberNotFoundException("로그인 정보가 올바르지 않습니다");
 		}
-		
 		return obj;
 	}
 
@@ -41,11 +40,13 @@ public class MybatisMemberDAO implements MemberDAO{
 
 	@Override
 	public void update(Member member) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void delete(Member member) {
+		// TODO Auto-generated method stub
 		
 	}
 	

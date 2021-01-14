@@ -16,16 +16,19 @@ public class MybatisColorDAO implements ColorDAO{
 	
 	@Override
 	public List selectAll() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List selectById(int product_id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Color select(int color_id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -39,11 +42,13 @@ public class MybatisColorDAO implements ColorDAO{
 
 	@Override
 	public void update(Color color)  throws ProductRegistException{
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void delete(int color_id)  throws ProductRegistException{
+		// TODO Auto-generated method stub
 		
 	}
 	

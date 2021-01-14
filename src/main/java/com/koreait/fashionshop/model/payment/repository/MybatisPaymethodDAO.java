@@ -10,14 +10,19 @@ import org.springframework.stereotype.Repository;
 public class MybatisPaymethodDAO implements PaymethodDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-
+	
 	public List selectAll() {
 		return sqlSessionTemplate.selectList("Paymethod.selectAll");
 	}
 
-	@Override
-	public void registOrder() {
-		
-	}
-
+	
+	
 }
+
+
+
+
+
+
+
+

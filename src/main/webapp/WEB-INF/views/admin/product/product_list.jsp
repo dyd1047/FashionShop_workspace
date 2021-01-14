@@ -1,6 +1,6 @@
 <%@page import="com.koreait.fashionshop.model.domain.Product"%>
 <%@page import="java.util.List"%>
-<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%
 	List<Product> productList =(List)request.getAttribute("productList");
 %>
@@ -11,9 +11,11 @@
 <%@ include file="../inc/header.jsp" %>
 <script>
 $(function(){
+	
 	$("#bt_regist").click(function(){
 		location.href="/admin/product/registform"; //글쓰기 폼 요청
 	});
+	
 	$("#bt_excel").click(function(){
 		location.href="/admin/product/excel/registform"; //대량 등록폼 요청
 	});
@@ -49,7 +51,7 @@ $(function(){
 		<tr>
 			<td colspan="6">
 				<button id="bt_regist">상품등록</button>
-				<button id="bt_excel">엑셀등록 *(대량의 상품을 등록하실 수 있습니다)</button>
+				<button id="bt_excel">엑셀등록</button>*(대량의 상품을 등록하실 수 있습니다)
 			</td>
 		</tr>
 	</table>	

@@ -20,21 +20,25 @@ public class TopCategoryServiceImpl implements TopCategoryService{
 
 	@Override
 	public TopCategory select(int topcategory_id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void insert(TopCategory topcategory) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void update(TopCategory topcategory) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void delete(int topcategory_id) {
+		// TODO Auto-generated method stub
 		
 	}
 

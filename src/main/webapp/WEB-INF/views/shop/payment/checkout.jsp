@@ -2,21 +2,21 @@
 <%@page import="com.koreait.fashionshop.model.domain.Paymethod"%>
 <%@page import="com.koreait.fashionshop.model.common.Formatter"%>
 <%@page import="com.koreait.fashionshop.model.domain.Cart"%>
-<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%
 	List<Cart> cartList = (List)request.getAttribute("cartList");
 	List<Paymethod> paymethodList = (List)request.getAttribute("paymethodList");
-	Member member = (Member)session.getAttribute("member");
+	Member member=(Member)session.getAttribute("member");
 	
 	//장바구니로부터, 상품 가액 계산
 	int totalPrice=0;
 	for(Cart cart : cartList){
-		totalPrice += cart.getQuantity() * cart.getPrice();
+		totalPrice += (cart.getQuantity() * cart.getPrice());
 	}
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -26,9 +26,8 @@
 
     <!-- Title  -->
     <title>Karl - Fashion Ecommerce Template | Home</title>
-
-    <%@ include file="../inc/header.jsp" %>
-	<script type="text/javascript">
+	<%@ include file="../inc/header.jsp" %>
+	<script>
 	function setData(ch){
 		var form=document.querySelector("#checkout-form");
 		
@@ -55,9 +54,10 @@
 </head>
 
 <body>
-    	<%@ include file="../inc/top.jsp" %>
+    	<%@include file="../inc/top.jsp" %>
         <!-- ****** Top Discount Area End ****** -->
-         <!-- ****** Checkout Area Start ****** -->
+		
+        <!-- ****** Checkout Area Start ****** -->
         <div class="checkout_area section_padding_100">
             <div class="container">
                 <div class="row">
@@ -84,11 +84,7 @@
                                         <input type="text" class="form-control" id="member_phone" value="010-8888-9999" required>
                                     </div>
                                     <div class="col-12 mb-3">
-                                        <label for="member_email">이메일</label>
-                                        <input type="text" class="form-control" id="member_email" value="<%=member.getEmail_id()%>@<%=member.getEmail_server()%>">
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="member_addr">주소 <span>*</span></label>
+                                        <label for="member_addr">주소</label>
                                         <input type="text" class="form-control" id="member_addr" value="<%=member.getAddr()%>">
                                     </div>
                                     
@@ -108,7 +104,7 @@
                                         <input type="text" class="form-control" id="last_name" name="receiver_phone" value="" required>
                                     </div>
                                     <div class="col-12 mb-3">
-                                        <label for="company">받으실 주소 <span>*</span></label>
+                                        <label for="company">받으실 주소</label>
                                         <input type="text" class="form-control" id="company" name="receiver_addr" value="">
                                     </div>
                                     
@@ -165,13 +161,13 @@
                 </div>
             </div>
         </div>
-        <!-- ****** Checkout Area End ****** -->
+        <!-- ****** Checkout Area End ****** -->		
+        	
         <!-- ****** Footer Area Start ****** -->
         <%@ include file="../inc/footer.jsp" %>
         <!-- ****** Footer Area End ****** -->
     </div>
     <!-- /.wrapper end -->
-
 </body>
 
 </html>

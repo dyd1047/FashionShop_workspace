@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <!-- Favicon  -->
 <link rel="icon" href="/resources/img/core-img/favicon.ico">
 <!-- Core Style CSS -->

@@ -16,16 +16,19 @@ public class MybatisImageDAO implements ImageDAO{
 	
 	@Override
 	public List selectAll() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List selectById(int product_id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Image select(int image_id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -40,11 +43,13 @@ public class MybatisImageDAO implements ImageDAO{
 
 	@Override
 	public void update(Image image)  throws ProductRegistException{
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void delete(int image_id)  throws ProductRegistException{
+		// TODO Auto-generated method stub
 		
 	}
 	

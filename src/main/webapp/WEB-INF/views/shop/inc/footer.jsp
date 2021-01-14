@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=utf-8"%>
- <footer class="footer_area">
+<%@ page contentType="text/html;charset=UTF-8"%>
+        <footer class="footer_area">
             <div class="container">
                 <div class="row">
                     <!-- Single Footer Area Start -->
@@ -70,16 +70,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 </div>
             </div>
         </footer>
-        
-        
-    <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="/resources/js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="/resources/js/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="/resources/js/bootstrap.min.js"></script>
-    <!-- Plugins js -->
-    <script src="/resources/js/plugins.js"></script>
-    <!-- Active js -->
-    <script src="/resources/js/active.js"></script>
-        
+		<!-- jQuery (Necessary for All JavaScript Plugins) -->
+		<script src="/resources/js/jquery/jquery-2.2.4.min.js"></script>
+		<!-- Popper js -->
+		<script src="/resources/js/popper.min.js"></script>
+		<!-- Bootstrap js -->
+		<script src="/resources/js/bootstrap.min.js"></script>
+		<!-- Plugins js -->
+		<script src="/resources/js/plugins.js"></script>
+		<!-- Active js -->
+		<script src="/resources/js/active.js"></script>

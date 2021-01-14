@@ -1,7 +1,7 @@
 <%@page import="com.koreait.fashionshop.model.domain.SubCategory"%>
 <%@page import="com.koreait.fashionshop.model.domain.TopCategory"%>
 <%@page import="java.util.List"%>
-<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%
 	List<TopCategory> topList = (List)request.getAttribute("topList");
 %>
@@ -23,7 +23,7 @@
                         <ul class="sub-menu collapse" id="<%=topCategory.getTopcategory_id()%>">
                         	<%for(int a=0;a<topCategory.getSubCategory().size();a++){ %>
                         	<%SubCategory subCategory=topCategory.getSubCategory().get(a);%>
-                            <li><a href="/shop/product/list?subcategory_id=<%=subCategory.getSubcategory_id()%>"><%=subCategory.getName() %></a></li>
+                            <li><a href="#"><%=subCategory.getName() %></a></li>
 							<%} %>
                         </ul>
                     </li>       
@@ -110,18 +110,29 @@
 
                                     <div class="collapse navbar-collapse align-items-start collapse" id="karl-navbar">
                                         <ul class="navbar-nav animated" id="nav">
-                                            <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="/shop/product/list?subcategory_id=1">Shop</a></li>
+                                            <li class="nav-item active"><a class="nav-link" href="/shop/main">Home</a></li>
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="karlDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
+                                                <div class="dropdown-menu" aria-labelledby="karlDropdown">
+                                                    <%for(TopCategory topCategory : topList){ %>
+                                                    <a class="dropdown-item" href="/"><%=topCategory.getName() %></a>
+													<%} %>                                                                                                        		
+                                                </div>
+                                            </li>
+                                            <li class="nav-item"><a class="nav-link" href="/shop/product/list?subcategory_id=5">Shopping</a></li>
+                                            <li class="nav-item">
+                                           		<a class="nav-link" href="/shop/cart/list"><span class="karl-level">3</span>Cart</a>
+                                            </li>
                                             <li class="nav-item"><a class="nav-link" href="/shop/cs/qna/list">Contact</a></li>
                                             <li class="nav-item"><a class="nav-link" href="/shop/member/registForm">SignUp</a></li>
                                             <li class="nav-item">
+                                            
                                             	<%if(session.getAttribute("member")==null){ //세션에 담겨진 데이터가 없다면%>
-                                            	<a class="nav-link" href="/shop/member/loginForm">SignIn</a>
+                                            		<a class="nav-link" href="/shop/member/loginForm">SignIn</a>
                                             	<%}else{ %>
-                                            	<a class="nav-link" href="/shop/member/logout">SignOut</a>
+                                            		<a class="nav-link" href="/shop/member/logout">SignOut</a>
                                             	<%} %>
                                             </li>
-                                            <li class="nav-item"><a class="nav-link" href="/shop/cart/list"><span class="karl-level">hot</span>Cart</a></li>
                                         </ul>
                                     </div>
                                 </nav>

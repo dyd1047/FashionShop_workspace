@@ -25,21 +25,25 @@ public class MybatisSubCategoryDAO implements SubCategoryDAO{
 
 	@Override
 	public SubCategory select(int topcategory_id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void insert(SubCategory topcategory) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void update(SubCategory topcategory) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void delete(int topcategory_id) {
+		// TODO Auto-generated method stub
 		
 	}
 	

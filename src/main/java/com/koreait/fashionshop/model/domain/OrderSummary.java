@@ -11,4 +11,5 @@ public class OrderSummary {
 	private String orderdate;
 	private int order_state_id;
 	private int paymethod_id;
+
 }

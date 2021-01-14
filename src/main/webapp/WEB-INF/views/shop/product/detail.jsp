@@ -2,13 +2,12 @@
 <%@page import="com.koreait.fashionshop.model.domain.Psize"%>
 <%@page import="com.koreait.fashionshop.model.common.Formatter"%>
 <%@page import="com.koreait.fashionshop.model.domain.Product"%>
-<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%
 	Product product = (Product)request.getAttribute("product");
 %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -18,21 +17,20 @@
 
     <!-- Title  -->
     <title>Karl - Fashion Ecommerce Template | Home</title>
-
-    <%@ include file="../inc/header.jsp" %>
+	<%@ include file="../inc/header.jsp" %>
 	<script type="text/javascript">
 		//비동기 방식으로 장바구니에 담자!!
 		function addCart(){
-			var formData = $("#cart_form").serialize(); //파라미터를 전송할 수 있는 상태의 문자열로 나열해줌
+			var formData=$("#cart_form").serialize();//파라미터를 전송할 수 있는 상태의 문자열로 나열해줌
 			
 			$.ajax({
 				url:"/async/shop/cart/regist",
-				type:"post",
+				type:"post", 
 				data:formData,
 				success:function(responseData){
-					if(responseData.resultCode == 1){
+					if(responseData.resultCode==1){
 						if(confirm(responseData.msg+"\n장바구니에 담긴 상품을 보러갈까요?")){
-							location.href=responseData.url;
+							location.href=responseData.url;							
 						}
 					}else{
 						alert(responseData.msg);
@@ -44,9 +42,10 @@
 </head>
 
 <body>
-    	<%@ include file="../inc/top.jsp" %>
+    	<%@include file="../inc/top.jsp" %>
         <!-- ****** Top Discount Area End ****** -->
-		<!-- <<<<<<<<<<<<<<<<<<<< Breadcumb Area Start <<<<<<<<<<<<<<<<<<<< -->
+		
+        <!-- <<<<<<<<<<<<<<<<<<<< Breadcumb Area Start <<<<<<<<<<<<<<<<<<<< -->
         <div class="breadcumb_area">
             <div class="container">
                 <div class="row">
@@ -72,32 +71,26 @@
                     <div class="col-12 col-md-6">
                         <div class="single_product_thumb">
                             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-								
-								<!-- 썸네일 -->
+									
+								<!-- 썸네일 -->	
                                 <ol class="carousel-indicators">
-                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(/resources/data/basic/<%=product.getProduct_id()%>.<%=product.getFilename()%>);"></li>
-                                	<%for(int i = 0; i < product.getImageList().size(); i++){ %>
+                                	<%for(int i=0;i<product.getImageList().size();i++){ %>
                                 	<%Image image = product.getImageList().get(i); %>
-	                                	<%if(i > 4)break; //총 4개까지만 %>
-	                                    <li data-target="#product_details_slider" data-slide-to="<%=i+1 %>" style="background-image: url(/resources/data/addon/<%=image.getImage_id()%>.<%=image.getFilename()%>);"></li>
+                                	<%if(i>=4)break; //총 4개까지만 허용할 것이므로..%>
+                                    <li <%if(i==0){%>class="active"<%}%>  data-target="#product_details_slider" data-slide-to="<%=i %>" style="background-image: url(/resources/data/addon/<%=image.getImage_id()%>.<%=image.getFilename()%>);"></li>
                                     <%} %>
                                 </ol>
 
                                 <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <a class="gallery_img" href="/resources/data/basic/<%=product.getProduct_id()%>.<%=product.getFilename()%>">
-                                        <img class="d-block w-100" src="/resources/data/basic/<%=product.getProduct_id()%>.<%=product.getFilename()%>" alt="slide 1" style="width:500px; height:600px;">
-                                    </a>
-                                    </div>
-                                <%for(int i = 0; i < product.getImageList().size(); i++){ %>
-                                <%Image image = product.getImageList().get(i); %>
-                                <%if(i > 4)break; //총 4개까지만 %>
-                                    <div class="carousel-item">
+									<%for(int i=0;i<product.getImageList().size();i++){ %>
+                                	<%Image image = product.getImageList().get(i); %>   
+                                	<%if(i>=4)break; //총 4개까지만 허용할 것이므로..%>
+                                    <div class="carousel-item<%if(i==0){%><%out.print(" active");%><%}%>" >
                                         <a class="gallery_img" href="/resources/data/addon/<%=image.getImage_id()%>.<%=image.getFilename()%>">
-                                        <img class="d-block w-100" src="/resources/data/addon/<%=image.getImage_id()%>.<%=image.getFilename()%>" alt="slide <%=i+2%>" style="width:500px; height:600px;">
-                                    </a>
+                                        	<img class="d-block w-100" src="/resources/data/addon/<%=image.getImage_id()%>.<%=image.getFilename()%>" alt="slide <%=i%>">
+                                    	</a>
                                     </div>
-                                <%} %>
+                                   <%} %>
                                 </div>
                             </div>
                         </div>
@@ -113,11 +106,11 @@
                             <p class="available">Available: <span class="text-muted">In Stock</span></p>
 
                             <div class="single_product_ratings mb-15">
-                            	<!-- 1~5 사이의 값에 따라 조건을 부여하고, 미달점수의 경우 -o를 붙인다 -->
+                            	<!-- 1~5사이의 값에 따라 조건을 부여하고, 미달점수의 경우 -o를 붙인다 -->
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
                                 <i class="fa fa-star-o" aria-hidden="true"></i>
                             </div>
 
@@ -125,7 +118,7 @@
                                 <h6 class="widget-title">Size</h6>
                                 <div class="widget-desc">
                                     <ul>
-                                    	<%for(Psize psize : product.getPsizeList()) {%>
+                                    	<%for(Psize psize : product.getPsizeList()){ %>
                                         <li><a href="#"><%=psize.getFit() %></a></li>
                                         <%} %>
                                     </ul>
@@ -135,12 +128,13 @@
                             <!-- Add to Cart Form -->
                             <form id="cart_form" class="cart clearfix mb-50 d-flex">
                             	<input type="hidden" name="product_id" value="<%=product.getProduct_id()%>">
+                            	
                                 <div class="quantity">
                                     <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                    <input type="number" class="qty-text" id="qty" step="1" min="1" max="12" name="quantity" value="1">
+                                    <input type="number" name="quantity" class="qty-text" id="qty" step="1" min="1" max="12"  value="1">
                                     <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                 </div>
-                                <button type="button" name="addtocart" value="5" class="btn cart-submit d-block" onclick="addCart()">Add to cart</button>
+                                <button type="button" name="addtocart" value="5" class="btn cart-submit d-block" onClick="addCart()">Add to cart</button>
                             </form>
 
                             <div id="accordion" role="tablist">
@@ -231,7 +225,9 @@
 
                                                 <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                             </div>
-                                            <button type="submit" name="addtocart" value="5" class="cart-submit">Add to cart</button>
+                                            
+                                            <button type="button" name="addtocart" value="5" class="cart-submit">Add to cart</button>
+                                            
                                             <!-- Wishlist -->
                                             <div class="modal_pro_wishlist">
                                                 <a href="wishlist.html" target="_blank"><i class="ti-heart"></i></a>
@@ -367,13 +363,13 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>		
+		
         <!-- ****** Footer Area Start ****** -->
         <%@ include file="../inc/footer.jsp" %>
         <!-- ****** Footer Area End ****** -->
     </div>
     <!-- /.wrapper end -->
-
 </body>
 
 </html>

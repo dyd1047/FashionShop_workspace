@@ -8,4 +8,5 @@ public class DepositFailException extends RuntimeException{
 	public DepositFailException(String msg, Throwable e) {
 		super(msg, e);
 	}
+
 }

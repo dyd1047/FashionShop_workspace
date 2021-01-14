@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
-encoding//src/main/java/com/koreait/fashionshop/aop/MemberSessionCheckAspect.java=UTF-8
+encoding//src/main/java/com/koreait/fashionshop/admin/controller/AdminProductController.java=UTF-8
+encoding//src/main/java/com/koreait/fashionshop/client/aop/MemberSessionCheckAspect.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/main.jsp=UTF-8

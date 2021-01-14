@@ -28,17 +28,16 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public List selectAll() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Member select(Member member) throws MemberNotFoundException{
-		//유저가 전송한 파라미터 비밀번호를 해시값으로 변환하여 아래의 메서드 호출
-		String hash = secureManager.getSecureData(member.getPassword());
-		member.setPassword(hash); //VO에 해쉬값 대입
-		
+		//유저가 전송한 파라미터비번을 해시값으로 변환하여 아래의 메서드 호출 
+		String hash = secureManager.getSecureData(member.getPassword()); 
+		member.setPassword(hash); //VO에 해시값 대입!!
 		Member obj = memberDAO.select(member);
-		
 		return obj;
 	}
 
@@ -61,11 +60,13 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public void update(Member member) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void delete(Member member) {
+		// TODO Auto-generated method stub
 		
 	}
 

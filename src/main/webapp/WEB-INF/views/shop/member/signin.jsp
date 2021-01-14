@@ -1,7 +1,6 @@
-<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -11,9 +10,12 @@
 
     <!-- Title  -->
     <title>Karl - Fashion Ecommerce Template | Home</title>
-
-    <%@ include file="../inc/header.jsp" %>
+	<%@ include file="../inc/header.jsp" %>
 	<style>
+		body {
+		  font-family: Arial, Helvetica, sans-serif;
+		}
+		
 		* {
 		  box-sizing: border-box;
 		}
@@ -22,6 +24,7 @@
 		.container {
 		  position: relative;
 		  border-radius: 5px;
+		  background-color: #f2f2f2;
 		  padding: 20px 0 30px 0;
 		} 
 		
@@ -136,107 +139,90 @@
 		    text-align: center;
 		  }
 		}
-		
-		.loader {
-		  border: 16px solid #f3f3f3;
-		  border-radius: 50%;
-		  border-top: 16px solid red;
-		  border-bottom: 16px solid black;
-		  border-left: 16px solid black;
-		  border-right: 16px solid black;
-		  width: 120px;
-		  height: 120px;
-		  -webkit-animation: spin 2s linear infinite; /* Safari */
-		  animation: spin 2s linear infinite;
-		  position: absolute;
-		  left: 50%;
-		  top: 50%;
-		  margin-left:-60px;
-		  margin-top:-60px;
-		}
-		
-		/* Safari */
-		@-webkit-keyframes spin {
-		  0% { -webkit-transform: rotate(0deg); }
-		  100% { -webkit-transform: rotate(360deg); }
-		}
-		
-		@keyframes spin {
-		  0% { transform: rotate(0deg); }
-		  100% { transform: rotate(360deg); }
-		}
-		
-		#overlay {
-		  position: fixed; /* Sit on top of the page content */
-		  display: none; /* Hidden by default */
-		  width: 100%; /* Full width (cover the whole page) */
-		  height: 100%; /* Full height (cover the whole page) */
-		  top: 0;
-		  left: 0;
-		  right: 0;
-		  bottom: 0;
-		  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-		  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-		  cursor: pointer; /* Add a pointer on hover */
-		}
-	</style>
-	<script type="text/javascript">
+	
+	
+	.container {
+	  border-radius: 5px;
+	  background-color: #f2f2f2;
+	  padding: 20px;
+	}
+	
+	.loader {
+	  border: 16px solid #ff0000;
+	  border-radius: 50%;
+	  border-top: 16px solid #3498db;
+	  width: 100px;
+	  height: 100px;
+	  -webkit-animation: spin 2s linear infinite; /* Safari */
+	  animation: spin 2s linear infinite;
+	}
+	
+	/* Safari */
+	@-webkit-keyframes spin {
+	  0% { -webkit-transform: rotate(0deg); }
+	  100% { -webkit-transform: rotate(360deg); }
+	}
+	
+	@keyframes spin {
+	  0% { transform: rotate(0deg); }
+	  100% { transform: rotate(360deg); }
+	}	
+	</style>	
+	<script>
 		function login(){
 			$("#loginForm").attr({
 				action:"/shop/member/login",
 				method:"post"
-			});
+			});		
+			
 			$("#loginForm").submit();
 		}
-	</script>
+	</script>		
 </head>
 
 <body>
-    	<%@ include file="../inc/top.jsp" %>
+    	<%@include file="../inc/top.jsp" %>
         <!-- ****** Top Discount Area End ****** -->
-        <div class="container">
-        	<div id="overlay">
-       	  		<div id="loader"></div>
-       	  	</div>
-       	  
-			<form id="loginForm" style="margin:50px 50px;">
+		<div class="container">   
+			<div id="loader" style="margin:auto"></div>
+			<form id="loginForm" style="margin:50px 50px">
 				<div class="row">
-					<div class="vl">
-						<span class="vl-innertext">or</span>
-					</div>
-					
-					<div class="col">
-						<a href="#" class="fb btn">
-							<i class="fa fa-facebook fa-fw"></i> Login with Facebook
-						</a>
-						<a href="#" class="twitter btn">
-							<i class="fa fa-twitter fa-fw"></i> Login with Twitter
-						</a>
-						<a href="#" class="google btn"><i class="fa fa-google fa-fw">
-							</i> Login with Google+
-						</a>
-					</div>
-					
-					<div class="col">
-						<div class="hide-md-lg">
-							<p>Or sign in manually:</p>
+				
+				<div class="vl">
+					<span class="vl-innertext">or</span>
+				</div>
+			
+				<div class="col">
+					<a href="#" class="fb btn">
+						<i class="fa fa-facebook fa-fw"></i> Login with Facebook
+					</a>
+					<a href="#" class="twitter btn">
+						<i class="fa fa-twitter fa-fw"></i> Login with Twitter
+					</a>
+					<a href="#" class="google btn"><i class="fa fa-google fa-fw">
+						</i> Login with Google+
+					</a>
+				</div>
+			
+				<div class="col">
+					<div class="hide-md-lg">
+						<p>Or sign in manually:</p>
 						</div>
-					
+			
 						<input type="text" name="user_id" placeholder="Username" required>
 						<input type="password" name="password" placeholder="Password" required>
-						<input type="button" value="Login" onclick="login()">
+						<input type="button" value="Login" onClick="login()">
 					</div>
-				    
+			
 				</div>
-			</form>
-		</div>
+			</form>						    
 
+		</div>	
         <!-- ****** Footer Area Start ****** -->
         <%@ include file="../inc/footer.jsp" %>
         <!-- ****** Footer Area End ****** -->
     </div>
     <!-- /.wrapper end -->
-
 </body>
 
 </html>

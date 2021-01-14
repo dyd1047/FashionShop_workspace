@@ -3,13 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
 	<typeAliases>
 		<typeAlias type="com.koreait.fashionshop.model.domain.TopCategory" 		alias="TopCategory"/>		
 		<typeAlias type="com.koreait.fashionshop.model.domain.SubCategory" 		alias="SubCategory"/>		
-		<typeAlias type="com.koreait.fashionshop.model.domain.Product" 			alias="Product"/>		
-		<typeAlias type="com.koreait.fashionshop.model.domain.Score" 				alias="Score"/>
+		<typeAlias type="com.koreait.fashionshop.model.domain.Product" 				alias="Product"/>		
+		<typeAlias type="com.koreait.fashionshop.model.domain.Score" 				alias="Score"/>		
 		<typeAlias type="com.koreait.fashionshop.model.domain.Image" 				alias="Image"/>		
-		<typeAlias type="com.koreait.fashionshop.model.domain.Psize" 				alias="Psize"/>		
+		<typeAlias type="com.koreait.fashionshop.model.domain.Psize" 					alias="Psize"/>		
 		<typeAlias type="com.koreait.fashionshop.model.domain.Color" 				alias="Color"/>
 		<typeAlias type="com.koreait.fashionshop.model.domain.Member" 			alias="Member"/>
 		<typeAlias type="com.koreait.fashionshop.model.domain.Cart" 					alias="Cart"/>
@@ -18,7 +19,8 @@
 		<typeAlias type="com.koreait.fashionshop.model.domain.OrderSummary" 	alias="OrderSummary"/>
 		<typeAlias type="com.koreait.fashionshop.model.domain.OrderDetail" 		alias="OrderDetail"/>
 		<typeAlias type="com.koreait.fashionshop.model.domain.Receiver" 			alias="Receiver"/>
-		<typeAlias type="com.koreait.fashionshop.model.domain.Qna" 			alias="Qna"/>
+		<typeAlias type="com.koreait.fashionshop.model.domain.Qna" 					alias="Qna"/>
+		
 	</typeAliases>
 	
 	<mappers>

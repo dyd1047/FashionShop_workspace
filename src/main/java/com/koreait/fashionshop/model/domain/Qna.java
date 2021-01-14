@@ -10,4 +10,5 @@ public class Qna {
 	private String content;
 	private String regdate;
 	private int hit;
+	
 }

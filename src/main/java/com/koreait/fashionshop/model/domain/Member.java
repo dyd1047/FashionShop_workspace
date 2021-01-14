@@ -13,5 +13,4 @@ public class Member {
 	private String zipcode;
 	private String addr;
 	private String regdate;
-
 }

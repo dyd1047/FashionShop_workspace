@@ -1,7 +1,8 @@
 <%@page import="com.koreait.fashionshop.model.common.MessageData"%>
-<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%
-	MessageData messageData = (MessageData)request.getAttribute("messageData");
+	MessageData messageData= (MessageData)request.getAttribute("messageData");
+
 %>
 <!DOCTYPE html>
 <html lang="en">
