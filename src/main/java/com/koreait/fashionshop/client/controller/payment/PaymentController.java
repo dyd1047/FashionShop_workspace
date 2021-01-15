@@ -41,12 +41,12 @@ public class PaymentController {
 	private TopCategoryService topCategoryService;
 	
 	
-	//ì¥ë°”êµ¬ë‹ˆì— ìƒí’ˆ ë‹´ê¸° ìš”ì²­ 
+	//Àå¹Ù±¸´Ï¿¡ »óÇ° ´ã±â ¿äÃ» 
 	@RequestMapping(value="/cart/regist", method=RequestMethod.POST)
 	@ResponseBody
 	public MessageData registCart(Cart cart, HttpSession session) {
 		if(session.getAttribute("member")==null) {
-			throw new LoginRequiredException("ë¡œê·¸ì¸ì´ í•„ìš”í•œ ì„œë¹„ìŠ¤ì…ë‹ˆë‹¤.");
+			throw new LoginRequiredException("·Î±×ÀÎÀÌ ÇÊ¿äÇÑ ¼­ºñ½ºÀÔ´Ï´Ù.");
 		}
 		
 		Member member = (Member)session.getAttribute("member");
@@ -56,16 +56,16 @@ public class PaymentController {
 		cart.setMember_id(member.getMember_id());
 		paymentService.insert(cart);
 		
-		//MessageConverter ì— ì˜í•´ VOëŠ” JSONí˜•íƒœë¡œ ì‘ë‹µë˜ì–´ì§ˆ ìˆ˜ ìˆë‹¤!!
+		//MessageConverter ¿¡ ÀÇÇØ VO´Â JSONÇüÅÂ·Î ÀÀ´äµÇ¾îÁú ¼ö ÀÖ´Ù!!
 		MessageData messageData = new MessageData();
 		messageData.setResultCode(1);
-		messageData.setMsg("ì¥ë°”êµ¬ë‹ˆì— ìƒí’ˆì´ ë‹´ê²¼ìŠµë‹ˆë‹¤");
+		messageData.setMsg("Àå¹Ù±¸´Ï¿¡ »óÇ°ÀÌ ´ã°å½À´Ï´Ù");
 		messageData.setUrl("/shop/cart/list");
 		
 		return messageData;
 	}
 	
-	//ì¥ë°”êµ¬ë‹ˆ ëª©ë¡ ìš”ì²­ 
+	//Àå¹Ù±¸´Ï ¸ñ·Ï ¿äÃ» 
 	@RequestMapping(value="/cart/list", method=RequestMethod.GET)
 	public ModelAndView getCartList(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -81,12 +81,12 @@ public class PaymentController {
 	}
 	
 	
-	//ì¥ë°”êµ¬ë‹ˆ ë¹„ìš°ê¸° 
+	//Àå¹Ù±¸´Ï ºñ¿ì±â 
 	@RequestMapping(value="/cart/del", method=RequestMethod.GET)
 	public String delCart(HttpSession session){
-		//ì¥ë°”êµ¬ë‹ˆë¥¼ ì‚­ì œí•˜ê¸° ìœ„í•´ì„œëŠ”, ë¡œê·¸ì¸í•œ íšŒì›ë§Œ ê°€ëŠ¥..
+		//Àå¹Ù±¸´Ï¸¦ »èÁ¦ÇÏ±â À§ÇØ¼­´Â, ·Î±×ÀÎÇÑ È¸¿ø¸¸ °¡´É..
 		if(session.getAttribute("member")==null) {
-			throw new LoginRequiredException("ë¡œê·¸ì¸ì´ í•„ìš”í•œ ì„œë¹„ìŠ¤ì…ë‹ˆë‹¤");
+			throw new LoginRequiredException("·Î±×ÀÎÀÌ ÇÊ¿äÇÑ ¼­ºñ½ºÀÔ´Ï´Ù");
 		}
 		paymentService.delete((Member)session.getAttribute("member"));
 		
@@ -96,7 +96,7 @@ public class PaymentController {
 	
 	@RequestMapping(value="/cart/edit", method=RequestMethod.POST)
 	public ModelAndView editCart(@RequestParam("cart_id") int[] cartArray, @RequestParam("quantity") int[] qArray) {
-		//ë„˜ê²¨ë°›ì€ íŒŒë¼ë¯¸í„° ì¶œë ¥í•˜ê¸°!!  cart_id,  quantity 
+		//³Ñ°Ü¹ŞÀº ÆÄ¶ó¹ÌÅÍ Ãâ·ÂÇÏ±â!!  cart_id,  quantity 
 		logger.debug("cartArray length "+cartArray.length);
 		
 		List cartList = new ArrayList();
@@ -108,10 +108,10 @@ public class PaymentController {
 		}
 		paymentService.update(cartList);
 		
-		//ìˆ˜ì •ë˜ì—ˆë‹¤ëŠ” ë©”ì‹œì§€ë¥¼ ë³´ê³ ì‹¶ë‹¤ë©´.. message.jspë¡œ ì‘ë‹µí•˜ì
+		//¼öÁ¤µÇ¾ú´Ù´Â ¸Ş½ÃÁö¸¦ º¸°í½Í´Ù¸é.. message.jsp·Î ÀÀ´äÇÏÀÚ
 		MessageData messageData = new MessageData();
 		messageData.setResultCode(1);
-		messageData.setMsg("ì¥ë°”êµ¬ë‹ˆê°€ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤");
+		messageData.setMsg("Àå¹Ù±¸´Ï°¡ ¼öÁ¤µÇ¾ú½À´Ï´Ù");
 		messageData.setUrl("/cart/list");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("messageData", messageData);
@@ -120,17 +120,17 @@ public class PaymentController {
 		return mav;
 	}
 	
-	//ì²´í¬ì•„ì›ƒ í˜ì´ì§€ ìš”ì²­ 
+	//Ã¼Å©¾Æ¿ô ÆäÀÌÁö ¿äÃ» 
 	@GetMapping("/payment/form")
 	public String payForm(Model model, HttpSession session) {
 		List topList = topCategoryService.selectAll();
-		model.addAttribute("topList", topList); //ModelAndViewì—ì„œì˜ Modelë§Œ ì‚¬ìš©..
+		model.addAttribute("topList", topList); //ModelAndView¿¡¼­ÀÇ Model¸¸ »ç¿ë..
 		
-		//ê²°ì œìˆ˜ë‹¨ ê°€ì ¸ì˜¤ê¸° 
+		//°áÁ¦¼ö´Ü °¡Á®¿À±â 
 		List paymethodList = paymentService.selectPaymethodList();
 		model.addAttribute("paymethodList", paymethodList);
 		
-		//ì¥ë°”êµ¬ë‹ˆ ì •ë³´ë„ ê°€ì ¸ì˜¤ê¸° 
+		//Àå¹Ù±¸´Ï Á¤º¸µµ °¡Á®¿À±â 
 		Member member =(Member)session.getAttribute("member");
 		List cartList = paymentService.selectCartList(member.getMember_id());
 		model.addAttribute("cartList", cartList);
@@ -138,17 +138,17 @@ public class PaymentController {
 		return "shop/payment/checkout";
 	}
 	
-	//ê²°ì œìš”ì²­ ì²˜ë¦¬
+	//°áÁ¦¿äÃ» Ã³¸®
 	@PostMapping("/payment/regist")
 	public String pay(HttpSession session, OrderSummary orderSummary, Receiver receiver) {
-		logger.debug("ë°›ì„ ì‚¬ëŒ ì´ë¦„ "+receiver.getReceiver_name());
-		logger.debug("ë°›ì„ ì‚¬ëŒ ì—°ë½ì²˜ "+receiver.getReceiver_phone());
-		logger.debug("ë°›ì„ ì‚¬ëŒ ì£¼ì†Œ "+receiver.getReceiver_addr());
-		logger.debug("ê²°ì œë°©ë²•ì€ "+orderSummary.getPaymethod_id());
+		logger.debug("¹ŞÀ» »ç¶÷ ÀÌ¸§ "+receiver.getReceiver_name());
+		logger.debug("¹ŞÀ» »ç¶÷ ¿¬¶ôÃ³ "+receiver.getReceiver_phone());
+		logger.debug("¹ŞÀ» »ç¶÷ ÁÖ¼Ò "+receiver.getReceiver_addr());
+		logger.debug("°áÁ¦¹æ¹ıÀº "+orderSummary.getPaymethod_id());
 		logger.debug("total_price "+orderSummary.getTotal_price());
 		logger.debug("total_pay "+orderSummary.getTotal_pay());
 		Member member=(Member)session.getAttribute("member");
-		orderSummary.setMember_id(member.getMember_id()); //íšŒì› pk
+		orderSummary.setMember_id(member.getMember_id()); //È¸¿ø pk
 		
 		paymentService.registOrder(orderSummary, receiver);
 		
@@ -156,11 +156,11 @@ public class PaymentController {
 	}
 	
 	
-	//ì¥ë°”êµ¬ë‹ˆì™€ ê´€ë ¨ëœ ì˜ˆì™¸ì²˜ë¦¬ í•¸ë“¤ëŸ¬
+	//Àå¹Ù±¸´Ï¿Í °ü·ÃµÈ ¿¹¿ÜÃ³¸® ÇÚµé·¯
 	@ExceptionHandler(CartException.class)
 	@ResponseBody
 	public MessageData handleException(CartException e) {
-		logger.debug("í•¸ë“¤ëŸ¬ ë™ì‘í•¨ "+ e.getMessage());
+		logger.debug("ÇÚµé·¯ µ¿ÀÛÇÔ "+ e.getMessage());
 		MessageData messageData = new MessageData();
 		messageData.setResultCode(0);
 		messageData.setMsg(e.getMessage());

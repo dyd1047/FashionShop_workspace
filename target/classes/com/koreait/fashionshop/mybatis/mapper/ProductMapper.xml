@@ -85,12 +85,8 @@
 		select * from product where product_id=#{product_id}
 	</select>
 	
+	<update id="update">
+		update product set subcategory_id=#{subCategory.subcategory_id}, product_name=#{product_name}, brand=#{brand}, detail=#{detail}, price=#{price}, filename=#{filename} where product_id=#{product_id}
+	</update>
+	
 </mapper>
-
-
-
-
-
-
-
-

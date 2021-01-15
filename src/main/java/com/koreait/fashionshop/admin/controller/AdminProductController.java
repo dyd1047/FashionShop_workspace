@@ -1,6 +1,7 @@
 package com.koreait.fashionshop.admin.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -31,7 +32,7 @@ import com.koreait.fashionshop.model.product.service.ProductService;
 import com.koreait.fashionshop.model.product.service.SubCategoryService;
 import com.koreait.fashionshop.model.product.service.TopCategoryService;
 
-//愿�由ъ옄 紐⑤뱶�뿉�꽌�쓽 �긽�뭹�뿉 ���븳 �슂泥� 泥섎━
+//관리자 모드에서의 상품에 대한 요청 처리
 @Controller
 public class AdminProductController implements ServletContextAware{
 	private static final Logger logger=LoggerFactory.getLogger(AdminProductController.class);
@@ -43,35 +44,38 @@ public class AdminProductController implements ServletContextAware{
 	private SubCategoryService subCategoryService;
 	
 	@Autowired
-	private ProductService productService;
+	private ProductService productService; //낱개의 상품등록시
 	
 	@Autowired
-	private DumpService dumpService;
+	private DumpService dumpService; //대량 등록시 
 	
 	@Autowired
 	private FileManager fileManager;
 	
-	//�슦由ш� �솢 ServletContext瑜� �뜥�빞�븯�뒗媛�?   getRealPath() �궗�슜�븯�젮怨�!!!
+	
+	//우리가 왜 ServletContext를 써야하는가?   getRealPath() 사용하려고!!!
 	private ServletContext servletContext;
 	
 	@Override
 	public void setServletContext(ServletContext servletContext) {
 		this.servletContext = servletContext;
-		//�씠 ���씠諛띿쓣 �넃移섏�留먭퀬, �떎�젣 臾쇰━�쟻 寃쎈줈瑜� FileManager �뿉 ���엯�빐�넃�옄!!!
-		fileManager.setSaveBasicDir(servletContext.getRealPath(fileManager.getSaveBasicDir()));
-		fileManager.setSaveAddonDir(servletContext.getRealPath(fileManager.getSaveAddonDir()));
+		//이 타이밍을 놓치지말고, 실제 물리적 경로를 FileManager 에 대입해놓자!!!
+//		fileManager.setSaveBasicDir(servletContext.getRealPath(fileManager.getSaveBasicDir()));
+//		fileManager.setSaveAddonDir(servletContext.getRealPath(fileManager.getSaveAddonDir()));
+		fileManager.setSaveBasicDir(fileManager.getSaveBasicDir());
+		fileManager.setSaveAddonDir(fileManager.getSaveAddonDir());
 		
 		logger.debug(fileManager.getSaveBasicDir());
 		
 	}
 	
-	//�긽�쐞移댄뀒怨좊━ 媛��졇�삤湲� (愿�由ъ옄�슜)
+	//상위카테고리 가져오기 (관리자용)
 	@RequestMapping(value="/product/registform", method=RequestMethod.GET)
 	public ModelAndView getTopList(HttpServletRequest request) {
-		//3�떒怨�: 濡쒖쭅 媛앹껜�뿉 �씪�떆�궓�떎
+		//3단계: 로직 객체에 일시킨다
 		List topList = topCategoryService.selectAll();
 		
-		//4�떒怨�: ���옣 
+		//4단계: 저장 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("topList", topList);
 		mav.setViewName("admin/product/regist_form");
@@ -80,8 +84,8 @@ public class AdminProductController implements ServletContextAware{
 	}
 	
 	
-	//�븯�쐞移댄뀒怨좊━ 媛��졇�삤湲�
-	//�뒪�봽留곸뿉�꽌�뒗 java媛앹껜�� Json媛� 蹂��솚(converting)�쓣 �옄�룞�쑝濡� 泥섎━�빐二쇰뒗 �씪�씠釉뚮윭由щ�� 吏��썝�븳�떎
+	//하위카테고리 가져오기
+	//스프링에서는 java객체와 Json간 변환(converting)을 자동으로 처리해주는 라이브러리를 지원한다
 	@RequestMapping(value="/product/sublist", method=RequestMethod.GET)
 	@ResponseBody
 	public List getSubList(HttpServletRequest request, int topcategory_id) {
@@ -94,23 +98,24 @@ public class AdminProductController implements ServletContextAware{
 		return "admin/product/excel_form";
 	}
 	
-	//�뿊���뿉 �쓽�븳 �긽�뭹�벑濡� �슂泥� 泥섎━ 
+	//엑셀에 의한 상품등록 요청 처리 
 	@RequestMapping(value="/product/excel/regist", method=RequestMethod.POST)
-	@ResponseBody // 鍮꾨룞湲� �씠誘�濡� 
+	@ResponseBody // 비동기 이므로 
 	public MessageData registByExcel(HttpServletRequest request, MultipartFile dump) {
-		String path = fileManager.getSaveBasicDir()+File.separator+dump.getOriginalFilename(); //���옣�븷 �뙆�씪紐�
+		String path = fileManager.getSaveBasicDir()+File.separator+dump.getOriginalFilename(); //저장할 파일명
 		fileManager.saveFile(path, dump);
 		
 		MessageData messageData = new MessageData();
 		messageData.setResultCode(1);
-		messageData.setMsg("�뿊���벑濡� �꽦怨�");
+		messageData.setMsg("엑셀등록 성공");
 		
+		//엑셀 읽어서 데이터베이스에 넣기!! 
 		dumpService.regist(path);
-		
+
 		return messageData;
 	}
 	
-	//�긽�뭹紐⑸줉
+	//상품목록
 	@RequestMapping(value="/product/list", method=RequestMethod.GET )
 	public ModelAndView getProductList(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("admin/product/product_list");
@@ -119,7 +124,7 @@ public class AdminProductController implements ServletContextAware{
 		return mav;
 	}
 	
-	//�긽�뭹�벑濡� �뤌 
+	//상품등록 폼 
 	@RequestMapping(value="/product/registform")
 	public String registForm() {
 		
@@ -127,27 +132,27 @@ public class AdminProductController implements ServletContextAware{
 	}
 	
 	
-	//�긽�뭹 �긽�꽭 
+	//상품 상세 
 	
-	//�긽�뭹 �벑濡� 
+	//상품 등록 
 	@RequestMapping(value="/product/regist", method=RequestMethod.POST)
 	@ResponseBody
 	public MessageData registProduct(HttpServletRequest request, Product product, String[] test) {
-		logger.debug("�븯�쐞移댄뀒怨좊━ "+product.getSubCategory().getSubcategory_id());
-		logger.debug("�긽�뭹紐� "+product.getProduct_name());
-		logger.debug("媛�寃� "+product.getPrice());
-		logger.debug("釉뚮옖�뱶 "+product.getBrand());
-		logger.debug("�긽�꽭�궡�슜 "+product.getDetail());
+		logger.debug("하위카테고리 "+product.getSubCategory().getSubcategory_id());
+		logger.debug("상품명 "+product.getProduct_name());
+		logger.debug("가격 "+product.getPrice());
+		logger.debug("브랜드 "+product.getBrand());
+		logger.debug("상세내용 "+product.getDetail());
 		
 		for(Psize psize : product.getPsize()) {
 			logger.debug(psize.getFit());
 		}
 		
-		productService.regist(fileManager, product); //�긽�뭹�벑濡� �꽌鍮꾩뒪�뿉寃� �슂泥�
+		productService.regist(fileManager, product); //상품등록 서비스에게 요청
 		
 		MessageData messageData = new MessageData();
 		messageData.setResultCode(1);
-		messageData.setMsg("�긽�뭹 �벑濡� �꽦怨듭엯�땲�떎.");
+		messageData.setMsg("상품 등록 성공입니다.");
 		
 		return messageData;
 	}
@@ -155,13 +160,13 @@ public class AdminProductController implements ServletContextAware{
 
 	
 	
-	//�긽�뭹 �닔�젙
+	//상품 수정
 	
-	//�긽�뭹 �궘�젣
+	//상품 삭제
 
 	
-	//�삁�쇅泥섎━ 
-	//�쐞�쓽 硫붿꽌�뱶 以묒뿉�꽌 �븯�굹�씪�룄 �삁�쇅媛� 諛쒖깮�븯硫�, �븘�옒�쓽 �빖�뱾�윭媛� �룞�옉
+	//예외처리 
+	//위의 메서드 중에서 하나라도 예외가 발생하면, 아래의 핸들러가 동작
 	@ExceptionHandler(ProductRegistException.class)
 	@ResponseBody
 	public String handleException(ProductRegistException e) {
@@ -186,21 +191,3 @@ public class AdminProductController implements ServletContextAware{
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

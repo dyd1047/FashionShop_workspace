@@ -7,15 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AdminController {
-	//ê´€ë¦¬ìëª¨ë“œ ë©”ì¸ ìš”ì²­
-	//ddì—ëª…ì‹œí•œ url-patternì˜ ë‚˜ë¨¸ì§€ ê²½ë¡œë¡œ ë§¤í•‘ì„ í•¨
+	//°ü¸®ÀÚ¸ğµå ¸ŞÀÎ ¿äÃ»
+	//dd¿¡¸í½ÃÇÑ url-patternÀÇ ³ª¸ÓÁö °æ·Î·Î ¸ÅÇÎÀ» ÇÔ
 	@RequestMapping("/secure")
 	public String adminMain(HttpServletRequest request) {
 		return "admin/main";
 	}
 }
-
-
-
-
 

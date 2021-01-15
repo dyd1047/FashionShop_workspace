@@ -14,36 +14,36 @@ public class ExcelManager {
 	FileInputStream fis;
 	
 	public ExcelManager() {
-		//濡쒖뺄?쓽 ?뙆?씪?쓣 ?젒洹쇳븯湲? ?쐞?빐?꽌?뒗 ?뙆?씪 ?뒪?듃由쇱씠 ?븘?슂?븿
+		//로컬의 파일을 접근하기 위해서는 파일 스트림이 필요함
 		try {
 			fis = new FileInputStream("D:/korea_workspace/FashionShop/src/main/webapp/resources/excel/myskill.xlsx");
-			//?뿊???쓣 ?젣?뼱?븯?뒗 媛앹껜 ?깮?꽦 XSSFWorkbook
+			//엑셀을 제어하는 객체 생성 XSSFWorkbook
 			XSSFWorkbook workbook = new XSSFWorkbook(fis);
 			
-			//?뙆?씪?젒洹쇱? ?꽦怨듯븳 ?긽?깭?씠誘?濡?, ?씠 ?떆?젏遺??꽣?뒗 ?돩?듃?뿉 ?젒洹쇳븳?떎 
-			XSSFSheet sheet=workbook.getSheetAt(0); //泥ル쾲吏? ?돩?듃 ?꽑?깮
+			//파일접근은 성공한 상태이므로, 이 시점부터는 쉬트에 접근한다 
+			XSSFSheet sheet=workbook.getSheetAt(0); //첫번째 쉬트 선택
 			
-			//?씠 ?떆?젏遺??꽣?뒗 sheet瑜? ?젣?뼱?븷 ?닔 ?엳?쑝誘?濡?, 珥? 紐뉕굔?씠 議댁옱?븯?뒗吏?遺??꽣 ?븣?븘蹂몃떎 
-			int rows = sheet.getPhysicalNumberOfRows(); //?뜲?씠?꽣媛? 梨꾩썙吏? row ?닔
-			System.out.println("?젅肄붾뱶 ?닔?뒗 : "+rows);
+			//이 시점부터는 sheet를 제어할 수 있으므로, 총 몇건이 존재하는지부터 알아본다 
+			int rows = sheet.getPhysicalNumberOfRows(); //데이터가 채워진 row 수
+			System.out.println("레코드 수는 : "+rows);
 			
-			//濡쒖슦?? 而щ읆 ?닔留뚰겮 諛섎났臾? ?떎?뻾?븯硫?, ?뜲?씠?꽣瑜? ?젣?뼱?빐蹂댁옄
+			//로우와 컬럼 수만큼 반복문 실행하며, 데이터를 제어해보자
 			for(int i=0;i<rows;i++) {
-				XSSFRow row=sheet.getRow(i); //?븯?굹?쓽 濡쒖슦瑜? ?젒洹?
+				XSSFRow row=sheet.getRow(i); //하나의 로우를 접근
 				
-				//而щ읆?닔留뚰겮 諛섎났臾? ?떎?뻾
+				//컬럼수만큼 반복문 실행
 				int columCount=row.getPhysicalNumberOfCells();
 				for(int a=0;a<columCount;a++) {
-					XSSFCell cell=row.getCell(a); //而щ읆 ?븳媛쒕?? ?젒洹?
+					XSSFCell cell=row.getCell(a); //컬럼 한개를 접근
 					
-					//媛곸??쓽 ?옄猷뚰삎?쓣 ?뙋?떒?븯?뿬 洹몄뿉 留욊쾶 ?젒洹? 
-					if(cell.getCellType() == CellType.STRING ) {//???쓽 ?옄猷뚰삎?씠 臾몄옄?씤寃쎌슦..
+					//각셀의 자료형을 판단하여 그에 맞게 접근 
+					if(cell.getCellType() == CellType.STRING ) {//셀의 자료형이 문자인경우..
 						System.out.print(cell.getStringCellValue()+"\t");
 					}else if(cell.getCellType() == CellType.NUMERIC) {
 						System.out.print((int)cell.getNumericCellValue()+"\t");
 					}
 				}
-				System.out.println();//以꾨컮轅?
+				System.out.println();//줄바꿈
 			}
 			
 		} catch (FileNotFoundException e) {

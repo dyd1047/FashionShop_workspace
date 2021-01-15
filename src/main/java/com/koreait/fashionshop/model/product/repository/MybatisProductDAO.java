@@ -33,19 +33,21 @@ public class MybatisProductDAO implements ProductDAO{
 	public void insert(Product product) throws ProductRegistException{
 		int result = sqlSessionTemplate.insert("Product.insert", product);
 		if(result==0) {
-			throw new ProductRegistException("ìƒí’ˆí…Œì´ë¸”ì— ì…ë ¥ì‹¤íŒ¨");
+			throw new ProductRegistException("»óÇ°Å×ÀÌºí¿¡ ÀÔ·Â ½ÇÆĞ");
 		}
 	}
 
 	@Override
 	public void update(Product product) throws ProductRegistException{
-
+		int result = sqlSessionTemplate.update("Product.update", product);
+		if(result == 0) {
+			throw new ProductRegistException("»óÇ° ¼öÁ¤ ½ÇÆĞ");
+		}
 		
 	}
 
 	@Override
 	public void delete(int product_id)  throws ProductRegistException{
-		// TODO Auto-generated method stub
 		
 	}
 	

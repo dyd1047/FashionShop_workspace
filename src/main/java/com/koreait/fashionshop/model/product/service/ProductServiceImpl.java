@@ -56,44 +56,44 @@ public class ProductServiceImpl implements ProductService{
 	public void regist(FileManager fileManager, Product product) throws UploadFailException, ProductRegistException{
 		
 		String ext=fileManager.getExtend(product.getRepImg().getOriginalFilename());
-		product.setFilename(ext); //í™•ì¥ì ê²°ì •
-		//dbì— ë„£ëŠ” ì¼ì€ DAOì—ê²Œ ì‹œí‚¤ê³ 
+		product.setFilename(ext); //È®ÀåÀÚ °áÁ¤
+		//db¿¡ ³Ö´Â ÀÏÀº DAO¿¡°Ô ½ÃÅ°°í
 		productDAO.insert(product);
 		
-		//íŒŒì¼ ì—…ë¡œë“œ!!ëŠ” FileManagerì—ê²Œ ì‹œí‚¨ë‹¤
-		//ëŒ€í‘œì´ë¯¸ì§€ ì—…ë¡œë“œ 
+		//ÆÄÀÏ ¾÷·Îµå!!´Â FileManager¿¡°Ô ½ÃÅ²´Ù
+		//´ëÇ¥ÀÌ¹ÌÁö ¾÷·Îµå 
 		String basicImg = product.getProduct_id()+"."+ext;
 		fileManager.saveFile(fileManager.getSaveBasicDir()+File.separator+basicImg, product.getRepImg());
 		
-		//ì¶”ê°€ì´ë¯¸ì§€ ì—…ë¡œë“œ (FileManagerì—ê²Œ ì¶”ê°€ì´ë¯¸ì§€ ê°¯ìˆ˜ë§Œí¼ ì—…ë¡œë“œ ì—…ë¬´ë¥¼ ì‹œí‚¤ë©´ ëœë‹¤!!)
+		//Ãß°¡ÀÌ¹ÌÁö ¾÷·Îµå (FileManager¿¡°Ô Ãß°¡ÀÌ¹ÌÁö °¹¼ö¸¸Å­ ¾÷·Îµå ¾÷¹«¸¦ ½ÃÅ°¸é µÈ´Ù!!)
 		for(int i=0;i<product.getAddImg().length;i++) {
 			
 			MultipartFile file = product.getAddImg()[i];
 			ext = fileManager.getExtend(file.getOriginalFilename());
 			
-			//image tableì— ë„£ê¸°!!
+			//image table¿¡ ³Ö±â!!
 			Image image = new Image();
 			image.setProduct_id(product.getProduct_id()); //fk
-			image.setFilename(ext); //í™•ì¥ì ë„£ê¸°
+			image.setFilename(ext); //È®ÀåÀÚ ³Ö±â
 			imageDAO.insert(image);
 			
-			//ë©”ë‹ˆì ¸ì˜ ì €ì¥ ë©”ì„œë“œ í˜¸ì¶œ
+			//¸Ş´ÏÁ®ÀÇ ÀúÀå ¸Ş¼­µå È£Ãâ
 			String addImg = image.getImage_id()+"."+ext;
 			fileManager.saveFile(fileManager.getSaveAddonDir()+File.separator+addImg, file);
 		}
 		
-		//ê¸°íƒ€ ì˜µì…˜ ì¤‘, ìƒ‰ìƒ ì‚¬ì´ì¦ˆ ë„£ê¸° (ë°˜ë³µë¬¸ìœ¼ë¡œ...)
+		//±âÅ¸ ¿É¼Ç Áß, »ö»ó »çÀÌÁî ³Ö±â (¹İº¹¹®À¸·Î...)
 		
-		//ì‚¬ì´ì¦ˆ
+		//»çÀÌÁî
 		for(Psize psize : product.getPsize()) {
-			//logger.debug("ë‹¹ì‹ ì´ ì„ íƒí•œ ì‚¬ì´ì¦ˆëŠ” "+psize.getFit());
-			psize.setProduct_id(product.getProduct_id());//fk ëŒ€ì…
+			//logger.debug("´ç½ÅÀÌ ¼±ÅÃÇÑ »çÀÌÁî´Â "+psize.getFit());
+			psize.setProduct_id(product.getProduct_id());//fk ´ëÀÔ
 			psizeDAO.insert(psize);
 		}
 		
-		//ìƒ‰ìƒ 
+		//»ö»ó 
 		for(Color color : product.getColor()){
-			logger.debug("ë„˜ê²¨ë°›ì€ ìƒ‰ìƒì€ "+color.getPicker());
+			logger.debug("³Ñ°Ü¹ŞÀº »ö»óÀº "+color.getPicker());
 			color.setProduct_id(product.getProduct_id());
 			colorDAO.insert(color);
 		}
@@ -102,13 +102,11 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public void update(Product product) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void delete(int product_id) {
-		// TODO Auto-generated method stub
 		
 	}
 
