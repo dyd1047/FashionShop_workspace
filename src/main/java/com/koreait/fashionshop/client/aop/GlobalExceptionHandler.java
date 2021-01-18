@@ -9,9 +9,9 @@ import com.koreait.fashionshop.exception.LoginAsyncRequiredException;
 import com.koreait.fashionshop.exception.LoginRequiredException;
 import com.koreait.fashionshop.model.common.MessageData;
 
-/*모든 컨트롤러마다 일일이 예외처리 핸들러를 작성하면 코드 중복이 발생하므로, 
- *컨트롤러에서 발생하는 모든 예외를 감지하는 객체를 정의하여, 공통예외처리를 
- *작성하자!!
+/*��� ��Ʈ�ѷ����� ������ ����ó�� �ڵ鷯�� �ۼ��ϸ� �ڵ� �ߺ��� �߻��ϹǷ�, 
+ *��Ʈ�ѷ����� �߻��ϴ� ��� ���ܸ� �����ϴ� ��ü�� �����Ͽ�, ���뿹��ó���� 
+ *�ۼ�����!!
  * */
 @ControllerAdvice
 public class GlobalExceptionHandler {
